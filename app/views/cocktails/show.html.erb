@@ -3,8 +3,17 @@
   <div class="d-flex justify-content-center">
     <ol>
       <% @cocktail.doses.each do |dose| %>
-        <li><%= dose.ingredient.name %>: <%= dose.description %> cl</li>
+        <li>
+          <%= dose.ingredient.name %>: <%= dose.description %> cl
+          <%= link_to "🗑", dose, method: :delete, data: { confirm: "Are you SURE?" } %>
+        </li>
+      <% end %>
+      <%= simple_form_for [@cocktail, @dose], method: :post, html: { class: 'form-inline' } do |f| %>
+        <%= f.input :ingredient_id, collection: @ingredients_names %>
+        <%= f.input :description %>
+        <%= f.submit class: "btn btn-primary" %>
       <% end %>
     </ol>
   </div>
+  <%= link_to "Delete", @cocktail, method: :delete, class: "btn btn-danger btn-block", data: {confirm: "Really???"} %>
 </div>
