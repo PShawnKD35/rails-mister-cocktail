@@ -1,2 +1,10 @@
-<h1>Cocktails#show</h1>
-<p>Find me in app/views/cocktails/show.html.erb</p>
+<h1 class="text-center my-3"><%= @cocktail.name %></h1>
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <ol>
+      <% @cocktail.doses.each do |dose| %>
+        <li><%= dose.ingredient.name %>: <%= dose.description %> cl</li>
+      <% end %>
+    </ol>
+  </div>
+</div>

@@ -1,19 +1,22 @@
 <h1 class="text-center my-3">Cocktails Gallery</h1>
 <div class="container">
+  <h5 class="text-center"><%= link_to "Add a new Cocktail", new_cocktail_path %></h5>
   <div class="row">
     <% @cocktails.each do |cocktail| %>
       <div class="col-4 card-group">
         <div class="card p-3 m-3">
-          <h4><%= cocktail.name %></h4>
-          <ul>
-            <% cocktail.doses.each do |dose| %>
-              <li>
-                <p>
-                  <%= dose.ingredient.name %> <%= dose.description %>cl
-                </p>
-              </li>
-            <% end %>
-          </ul>
+          <%= link_to cocktail do %>
+            <h4><%= cocktail.name %></h4>
+            <ul>
+              <% cocktail.doses.each do |dose| %>
+                <li>
+                  <p>
+                    <%= dose.ingredient.name %> <%= dose.description %> cl
+                  </p>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
         </div>
       </div>
     <% end %>
