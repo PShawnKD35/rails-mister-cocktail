@@ -15,7 +15,7 @@ class DosesController < ApplicationController
 
   def destroy
     @dose = Dose.find(params[:id])
-    if Dose.delete(params[:id])
+    if Dose.destroy(params[:id])
       redirect_to cocktail_path(@dose.cocktail_id)
     else
       render text: "Deleting failed for no reason!!!"

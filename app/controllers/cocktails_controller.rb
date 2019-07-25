@@ -25,7 +25,7 @@ class CocktailsController < ApplicationController
   end
 
   def destroy
-    if Cocktail.delete(params[:id])
+    if Cocktail.destroy(params[:id])
       redirect_to cocktails_path
     else
       render text: 'Deleting failed for no reason!'
