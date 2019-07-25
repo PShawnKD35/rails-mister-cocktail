@@ -11,7 +11,7 @@
       <%= simple_form_for [@cocktail, @dose], method: :post, html: { class: 'form-inline' } do |f| %>
         <%= f.input :ingredient_id, collection: @ingredients_names %>
         <%= f.input :description %>
-        <%= f.submit class: "btn btn-primary" %>
+        <%= f.submit "Add an ingredient", class: "btn btn-primary" %>
       <% end %>
     </ol>
   </div>
