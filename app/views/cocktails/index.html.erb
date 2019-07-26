@@ -3,7 +3,7 @@
   <h5 class="text-center"><%= link_to "Add a new Cocktail", new_cocktail_path, class: "btn btn-primary" %></h5>
   <div class="row">
     <% @cocktails.each do |cocktail| %>
-      <div class="col-4 card-group">
+      <div class="col-sm-12 col-md-6 col-lg-4 card-group">
         <div class="card p-3 m-3 shadow text-center">
           <%= link_to cocktail do %>
             <%= cl_image_tag cocktail.image, height: 300, crop: :thumb, style: 'width: 100%; height: 300px; object-fit: cover' %>
