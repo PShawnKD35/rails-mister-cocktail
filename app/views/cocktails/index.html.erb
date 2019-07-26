@@ -1,10 +1,10 @@
 <h1 class="text-center my-3">Cocktails Gallery</h1>
 <div class="container">
-  <h5 class="text-center"><%= link_to "Add a new Cocktail", new_cocktail_path %></h5>
+  <h5 class="text-center"><%= link_to "Add a new Cocktail", new_cocktail_path, class: "btn btn-primary" %></h5>
   <div class="row">
     <% @cocktails.each do |cocktail| %>
       <div class="col-4 card-group">
-        <div class="card p-3 m-3">
+        <div class="card p-3 m-3 shadow">
           <%= link_to cocktail do %>
             <h4><%= cocktail.name %></h4>
             <ul>
