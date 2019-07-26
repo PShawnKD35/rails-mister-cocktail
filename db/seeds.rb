@@ -17,6 +17,7 @@ end
 # ingredients_uri = 'https://raw.githubusercontent.com/maltyeva/iba-cocktails/master/ingredients.json'
 ingredients_uri = 'db/ingredients.json'
 recipes_uri = 'db/cocktails.json'
+cocktail_images_uri = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
 
 # Create Ingredients
 ingredients_string = open(ingredients_uri).read
@@ -25,7 +26,7 @@ ingredients.each do |name, _values|
   Ingredient.create!(name: name)
 end
 
-# Create Coctails and Doses
+# Create Cocktails and Doses
 recipes_string = open(recipes_uri).read
 recipes = JSON.parse(recipes_string)
 recipes.each do |recipe|
@@ -33,4 +34,14 @@ recipes.each do |recipe|
   recipe['ingredients'].each do |dose|
     Dose.create(description: dose['amount'], ingredient: Ingredient.find_by(name: dose['ingredient']), cocktail: cocktail) unless dose['ingredient'].nil?
   end
+end
+
+# Steal images for cocktails
+Cocktail.all.each do |cocktail|
+  cocktail_url = cocktail_images_uri + cocktail.name.downcase
+  cocktail_details_string = open(cocktail_url).read
+  cocktail_details = JSON.parse(cocktail_details_string)
+  cocktail_image_url = cocktail_details['drinks'].first['strDrinkThumb']
+  cocktail.remote_image_url = cocktail_image_url
+  sleep(5)
 end
