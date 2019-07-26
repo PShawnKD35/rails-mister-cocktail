@@ -22,7 +22,7 @@
         <%= f.input :description %>
         <%= f.submit "Add", class: "btn btn-primary" %>
       <% end %>
-      <h5 class="mt-3">Add/Update an Image</h5>
+      <h5 class="mt-3">Add/Update the Image</h5>
       <%= simple_form_for @cocktail, method: :patch do |f| %>
         <%= f.input :image %>
         <%= f.input :remote_image_url %>
