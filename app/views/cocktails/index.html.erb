@@ -6,8 +6,8 @@
       <div class="col-4 card-group">
         <div class="card p-3 m-3 shadow text-center">
           <%= link_to cocktail do %>
-            <%= cl_image_tag cocktail.image, height: 150, crop: :thumb %>
-            <h4 class="card-text"><%= cocktail.name %></h4>
+            <%= cl_image_tag cocktail.image, height: 300, crop: :thumb, style: 'width: 100%; height: 300px; object-fit: cover' %>
+            <h4 class="card-text mt-1"><%= cocktail.name %></h4>
             <!--<ul>
               <% cocktail.doses.each do |dose| %>
                 <li>
