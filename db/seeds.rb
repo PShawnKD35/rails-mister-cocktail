@@ -15,8 +15,8 @@ end
 
 # Resouces location
 # ingredients_uri = 'https://raw.githubusercontent.com/maltyeva/iba-cocktails/master/ingredients.json'
-ingredients_uri = 'ingredients.json'
-recipes_uri = 'cocktails.json'
+ingredients_uri = 'db/ingredients.json'
+recipes_uri = 'db/cocktails.json'
 
 # Create Ingredients
 ingredients_string = open(ingredients_uri).read
