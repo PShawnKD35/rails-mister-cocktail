@@ -1,27 +1,35 @@
 <h1 class="text-center my-3"><%= @cocktail.name %></h1>
 <div class="container">
-  <div class="d-flex justify-content-center">
-    <%= cl_image_tag @cocktail.image, width: 300, height: 400, crop: :fit %>
-    <ol>
-      <h5>Ingredients</h5>
-      <% @cocktail.doses.each do |dose| %>
-        <li>
-          <%= dose.ingredient.name %>: <%= dose.description %> cl
-          <%= link_to "🗑", dose, method: :delete, data: { confirm: "Are you SURE?" } %>
-        </li>
-      <% end %>
-      <%= simple_form_for [@cocktail, @dose], method: :post, html: { class: 'form-inline' } do |f| %>
+  <div class="row justify-content-center align-items-center">
+    <div class="col-12 col-lg-6 my-3">
+      <%= cl_image_tag @cocktail.image, crop: :fit, style: "width: 100%; height: 70vh; object-fit: cover" %>
+    </div>
+    <div class="col-12 col-lg-6 my-3">
+      <ol>
+        <h5>Ingredients</h5>
+        <% @cocktail.doses.each do |dose| %>
+          <li>
+            <%= dose.ingredient.name %>: <%= dose.description %> cl
+            <%= link_to "🗑", dose, method: :delete, data: { confirm: "Are you SURE?" } %>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+    <div class="col-12 my-3">
+      <h5>Add an Ingredient</h5>
+      <%= simple_form_for [@cocktail, @dose], method: :post do |f| %> <%# , html: { class: 'form-inline' } %>
         <%= f.input :ingredient_id, collection: @ingredients_names %>
         <%= f.input :description %>
-        <%= f.submit "Add an ingredient", class: "btn btn-primary" %>
+        <%= f.submit "Add", class: "btn btn-primary" %>
       <% end %>
-      <%= simple_form_for @cocktail, method: :patch, html: { class: 'form-inline'} do |f| %>
+      <h5 class="mt-3">Add/Update an Image</h5>
+      <%= simple_form_for @cocktail, method: :patch do |f| %>
         <%= f.input :image %>
         <%= f.input :remote_image_url %>
         <%= f.input :image_cache, as: :hidden %>
-        <%= f.submit "Add an image", class: 'btn btn-primary' %>
+        <%= f.submit "Add/Update", class: 'btn btn-primary' %>
       <% end %>
-    </ol>
+    </div>
   </div>
   <%= link_to "Delete", @cocktail, method: :delete, class: "btn btn-danger btn-block mt-3", data: {confirm: "Really???"} %>
 </div>
