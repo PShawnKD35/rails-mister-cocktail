@@ -39,16 +39,17 @@ end
 # Steal images for cocktails
 threads = []
 Cocktail.all.each do |cocktail|
-  next unless cocktail.image.nil?
-
   threads << Thread.new do
     cocktail_url = cocktail_images_uri + cocktail.name.downcase
     cocktail_details_string = open(cocktail_url).read
     cocktail_details = JSON.parse(cocktail_details_string)
-    unless cocktail_details['drinks'].nil? && cocktail_details['drinks'].first.nil? && cocktail_details['drinks'].first['strDrinkThumb'].nil?
-      cocktail_image_url = cocktail_details['drinks'].first['strDrinkThumb']
-      cocktail.remote_image_url = cocktail_image_url
-      cocktail.save
-    end
+    return if cocktail_details['drinks'].nil? || cocktail_details['drinks'].first.nil? || cocktail_details['drinks'].first['strDrinkThumb'].nil?
+
+    cocktail_image_url = cocktail_details['drinks'].first['strDrinkThumb']
+    cocktail.remote_image_url = cocktail_image_url
+    cocktail.save
   end
+  sleep(1)
 end
+
+threads.each(&:join)
