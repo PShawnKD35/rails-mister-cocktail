@@ -16,11 +16,22 @@ class CocktailsController < ApplicationController
   end
 
   def create
-    @cocktail = Cocktail.new(params.require(:cocktail).permit(:name))
+    @cocktail = Cocktail.new(params.require(:cocktail).permit(:name, :image))
     if @cocktail.save
       redirect_to @cocktail
     else
       render :new
+    end
+  end
+
+  def update
+    @dose = Dose.new
+    @cocktail = Cocktail.find(params[:id])
+    @cocktail.image = params.require(:cocktail).permit(:image)[:image]
+    if @cocktail.save
+      redirect_to @cocktail
+    else
+      render :show
     end
   end
 

@@ -4,10 +4,11 @@
   <div class="row">
     <% @cocktails.each do |cocktail| %>
       <div class="col-4 card-group">
-        <div class="card p-3 m-3 shadow">
+        <div class="card p-3 m-3 shadow text-center">
           <%= link_to cocktail do %>
-            <h4><%= cocktail.name %></h4>
-            <ul>
+            <%= cl_image_tag cocktail.image, height: 150, crop: :thumb %>
+            <h4 class="card-text"><%= cocktail.name %></h4>
+            <!--<ul>
               <% cocktail.doses.each do |dose| %>
                 <li>
                   <p>
@@ -15,7 +16,7 @@
                   </p>
                 </li>
               <% end %>
-            </ul>
+            </ul>-->
           <% end %>
         </div>
       </div>
