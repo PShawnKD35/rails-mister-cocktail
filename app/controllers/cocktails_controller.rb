@@ -27,8 +27,9 @@ class CocktailsController < ApplicationController
   def update
     @dose = Dose.new
     @cocktail = Cocktail.find(params[:id])
-    @cocktail.image = params.require(:cocktail).permit(:image)[:image]
-    if @cocktail.save
+    permitted_params = params.require(:cocktail).permit(:image, :remote_image_url)
+    # @cocktail.image = permitted_params[:image] unless permitted_params[:image].nil?
+    if @cocktail.update(permitted_params)
       redirect_to @cocktail
     else
       render :show
